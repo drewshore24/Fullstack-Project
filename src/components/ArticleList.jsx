@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import getArticleList from "../../websiteAPI";
+import {getArticleList} from "../../websiteAPI";
 import { Link } from "react-router-dom";
+import ArticleCard from "./ArticleCard";
 
-const ArticleList = () => {
-  const [allArticles, setAllArticles] = useState([]);
-  const [viewedArticle, setViewedArticle] = useState(null);
+const ArticleList = ({allArticles, setAllArticles}) => {
+
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
-
   useEffect(() => {
     setLoading(true);
     setError(false);
@@ -23,10 +22,6 @@ const ArticleList = () => {
       });
   }, []);
 
-  function onClick(viewedArticle) {
-    setViewedArticle(viewedArticle);
-  }
-
   if (isLoading) {
     return (
       <>
@@ -37,6 +32,7 @@ const ArticleList = () => {
     );
   }
 
+
   if (isError) {
     console.log(isError);
     return (
@@ -46,62 +42,29 @@ const ArticleList = () => {
       </>
     );
   }
-  if(viewedArticle){
-    return (
-        <section className="JustArticle">
-                      <nav>
-        <Link className="link" to="/">
-          Home
-        </Link>
-      </nav>
-          <h2> {viewedArticle.props.children[1].props.children[1]}</h2>
-          {viewedArticle}
-        </section>
-      );
-  }
+
+
   return (
     <section className="ArticleList">
-      <h1>Articles</h1>
       <nav>
         <Link className="link" to="/">
           Home
         </Link>
       </nav>
+      <h1>Articles</h1>
       <section className="Map">
         {allArticles.map((article) => {
-          const retArticle = (
-            <section className="SoloArticle" key={article.article_id}>
-              <p>Article id: {article.article_id}</p>
-              <p>Title: {article.title}</p>
-              <p>Topic: {article.topic}</p>
-              <p>Author: {article.author}</p>
-              <p>Created_at: {article.created_at}</p>
-              <p>Votes: {article.votes}</p>
-              <p>Comment count: {article.comment_count}</p>
-              <img src={article.article_img_url} alt="image" />
-            </section>
-          );
           return (
-            <section className="Article" key={article.article_id}>
-              <p>Article id: {article.article_id}</p>
-              <p>Title: {article.title}</p>
-              <p>Topic: {article.topic}</p>
-              <p>Author: {article.author}</p>
-              <p>Created_at: {article.created_at}</p>
-              <p>Votes: {article.votes}</p>
-              <p>Comment count: {article.comment_count}</p>
-              <img src={article.article_img_url} alt="image" />
-              <button
-                onClick={() => onClick(retArticle)}
-              >
-                View Article
-              </button>
-            </section>
+            <ArticleCard
+            key={article.article_id}
+            article={article}
+          />
           );
         })}
       </section>
     </section>
   );
 };
+
 
 export default ArticleList;

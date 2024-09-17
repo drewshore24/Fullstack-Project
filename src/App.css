@@ -36,6 +36,8 @@ h2{
   color: orange;
   margin: 10px;
   font-size: large;
+  text-align: center;
+  display: inline-block;
 }
 
 .ArticleList{
@@ -57,6 +59,7 @@ h2{
   margin: 10px;
   padding: 5px
 }
+
 
 .Article img{
   height: 200px;
@@ -83,6 +86,34 @@ h2{
   display:  flex;
   margin-left: auto;
   padding: 7px;
+}
+
+.JustArticle{
+  font-family:Arial, Helvetica, sans-serif;
+  color: #F1F6F8;
+  padding: 10px;
+  min-height: 50vh;
+  height: 90vh;
+  width: 80vw;
+}
+
+.JustArticle img{
+  height: 200px;
+  display: block;
+  border: 1.5px solid #ccc;
+  margin-bottom: 10px
+}
+
+
+.CommentC{
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border: 5px solid #21273D;
+  color: #F1F6F8;
+  text-align: left;
+  margin: 10px;
+  padding: 5px;
+  max-width: 50%;
+  max-height: 80%;
 }
 
 .SoloArticle p{
