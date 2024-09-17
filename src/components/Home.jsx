@@ -4,7 +4,6 @@ const Home = () => {
   return (
     <>
       <section className="Home">
-        <h1> Welcome to Bookface</h1>
         <nav>
           <Link className="link" to="/">
             Home
@@ -13,6 +12,7 @@ const Home = () => {
             Articles
           </Link>
         </nav>
+        <h1> Welcome to Bookface</h1>
       </section>
     </>
   );
