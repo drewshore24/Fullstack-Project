@@ -19,3 +19,9 @@ const websiteAPI = axios.create({
       return response.data.data
     })
   }
+  export function patchVote(vote, article_id){
+    return websiteAPI.patch(`/articles/${article_id}`, { inc_votes: vote }).then((response) => {
+      console.log('response in patchAPI', response)
+      return response.data.data
+    })
+  }
