@@ -46,6 +46,7 @@ return(
         {allComments.map((comment) => {
           return (
             <CommentCard
+            username={username}
             key={comment.comment_id}
             comment={comment}
           />

@@ -35,9 +35,13 @@ const websiteAPI = axios.create({
         body: newComment
        })
       .then((response) => {
-      // console.log(response, 'r')
-      // console.log(response.data.comment, 'rc')
-      // console.log(typeof(response.data.comment), 'to')
       return response.data.comment
+    })
+  }
+
+
+  export function deleteComment(comment_id){
+    return websiteAPI.delete(`/comments/${comment_id}`).then((response) => {
+      return response.data.data
     })
   }
