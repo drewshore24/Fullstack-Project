@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Home = () => {
+const Home = ({username}) => {
   return (
     <>
       <section className="Home">
@@ -13,6 +13,7 @@ const Home = () => {
           </Link>
         </nav>
         <h1> Welcome to Bookface</h1>
+        <p> You are logged in as {username}</p>
       </section>
     </>
   );

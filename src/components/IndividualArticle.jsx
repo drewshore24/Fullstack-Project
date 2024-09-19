@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
 import { getArticle, patchVote } from "../../websiteAPI";
 import { Link } from "react-router-dom";
-import { getComment } from "../../websiteAPI";
 import { useParams } from "react-router-dom";
-import CommentCard from "./CommentCard";
+import GetAllComments from "./GetAllComments";
+import ArticleCard from "./ArticleCard";
+import { Routes, Route } from "react-router-dom";
 
 
-const IndividualArticle = () => {
+const IndividualArticle = ({reqArticle, setReqArticle}) => {
   const { article_id } = useParams();
-  const [reqArticle, setReqArticle] = useState({});
-  const [allComments, setAllComments] = useState([]);
-  const [showComments, setShowComments] = useState(false)
+  // const [reqArticle, setReqArticle] = useState({});
   const [currVote, setCurrVote] = useState(0)
   const [voted, setVoted] = useState(false)
 
@@ -23,22 +22,9 @@ const IndividualArticle = () => {
   }, []);
 
 
-  useEffect(() => {
-    getComment(article_id).then((comment) => {
-      setAllComments(comment);
-    });
-  }, [showComments]);
-
-
-  function handleClick(){
-    setShowComments((currShowComments) => {return !currShowComments})
-  }
-
-
   function handleVote(){
     setCurrVote((currVote) => currVote +1)
     setVoted(true)
-    console.log(currVote)
     patchVote(1, article_id)
   }
 
@@ -54,28 +40,18 @@ const IndividualArticle = () => {
           Articles
         </Link>
       </nav>
-      <h2>{reqArticle.title}</h2>
-      <p>Topic: {reqArticle.topic}</p>
-      <p>Author: {reqArticle.author}</p>
-      <p>Body: {reqArticle.body}</p>
-      <p>Created_at: {newDate}</p>
-      <p>Comment count: {reqArticle.comment_count}</p>
-      <img src={reqArticle.article_img_url} alt="image" />
-      <p>Votes: {currVote}</p>
+      <ArticleCard
+            key={reqArticle.article_id}
+            article={reqArticle}
+            vote={currVote}
+      />
       <button onClick={handleVote} disabled={voted}> Vote</button>
       <br/>
       <br/>
-      <button onClick={handleClick}>Comments</button>
-      {showComments ?       <section className="Map">
-        {allComments.map((comment) => {
-          return (
-            <CommentCard
-            key={comment.comment_id}
-            comment={comment}
-          />
-          );
-        })}
-      </section>: null}
+      <Link className="link" to={`/articles/${article_id}/comments`}>
+          Get Comments
+        </Link>
+      {/* <GetAllComments reqArticle={reqArticle}/> */}
     </section>
   );
 };
