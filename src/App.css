@@ -136,3 +136,8 @@ textarea {
   75% {rotate:270deg}
   100% {rotate:360deg}
 }
+
+.DeletedLine{
+  color:#FF6F61 ;
+  font-weight: bold;  
+}

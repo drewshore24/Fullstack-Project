@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import DeletedThisComment from "./DeletedThisComment";
 
-const CommentCard = ({ comment}) => {
+const CommentCard = ({ username, comment}) => {
   const newDate = new Date(comment.created_at).toString()
     return(
     <section className="CommentC">
@@ -10,6 +11,7 @@ const CommentCard = ({ comment}) => {
     <p>Author: {comment.author}</p>
     <p>Created_at: {newDate}</p>
     <p>Votes: {comment.votes}</p>
+    <DeletedThisComment username={username} comment={comment}/>
   </section> )
 }
 

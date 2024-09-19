@@ -9,7 +9,6 @@ import { Routes, Route } from "react-router-dom";
 
 const IndividualArticle = ({reqArticle, setReqArticle}) => {
   const { article_id } = useParams();
-  // const [reqArticle, setReqArticle] = useState({});
   const [currVote, setCurrVote] = useState(0)
   const [voted, setVoted] = useState(false)
 
