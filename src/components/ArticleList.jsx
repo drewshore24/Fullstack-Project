@@ -2,11 +2,16 @@ import { useState, useEffect } from "react";
 import {getArticleList} from "../../websiteAPI";
 import { Link } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
+import { getArticlesByTopics } from "../../websiteAPI";
+import TopicsDropDown from "./TopicsNavs.jsx";
+import { useNavigate } from "react-router-dom"
 
-const ArticleList = ({allArticles, setAllArticles}) => {
+const ArticleList = ({allArticles, setAllArticles, selectedTopic, setSelectedTopic}) => {
 
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
+
+
   useEffect(() => {
     setLoading(true);
     setError(false);
@@ -21,6 +26,14 @@ const ArticleList = ({allArticles, setAllArticles}) => {
         setError(err);
       });
   }, []);
+
+
+  useEffect(() => {
+    getArticlesByTopics(selectedTopic)
+    .then((response) => {
+      console.log(response)
+    })
+  },[selectedTopic])
 
   if (isLoading) {
     return (
@@ -43,6 +56,9 @@ const ArticleList = ({allArticles, setAllArticles}) => {
     );
   }
 
+  if(selectedTopic){
+
+  }
 
   return (
     <section className="ArticleList">
@@ -52,6 +68,9 @@ const ArticleList = ({allArticles, setAllArticles}) => {
         </Link>
       </nav>
       <h1>Articles</h1>
+      <section>
+        <TopicsDropDown selectedTopic={selectedTopic} setSelectedTopic={setSelectedTopic}/>
+      </section>
       <section className="Map">
         {allArticles.map((article) => {
           return (

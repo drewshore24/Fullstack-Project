@@ -129,6 +129,10 @@ textarea {
   height: 150px;
 }
 
+nav{
+  text-align: center;
+}
+
 @keyframes spin {
   0% {rotate:0deg}
   25% {rotate:90deg}

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+
 import DeletedThisComment from "./DeletedThisComment";
 
 const CommentCard = ({ username, comment}) => {

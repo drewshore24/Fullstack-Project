@@ -45,3 +45,18 @@ const websiteAPI = axios.create({
       return response.data.data
     })
   }
+
+
+  export function getTopics(){
+    return websiteAPI.get("/topics").then((response) => {
+      return response.data.data
+    })
+  }
+
+
+  export function getArticlesByTopics(topic){
+    console.log(topic, 'topic in API')
+    return websiteAPI.get(`/articles?sort_by=topic&topicvalue=${topic}`).then((response) => {
+      return response.data.data
+    })
+  }
