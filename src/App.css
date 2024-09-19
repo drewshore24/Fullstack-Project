@@ -120,7 +120,14 @@ h2{
   color: #ccc;
 }
 
+label{
+  color: #F1F6F8;
+}
 
+textarea {
+  width: 500px; 
+  height: 150px;
+}
 
 @keyframes spin {
   0% {rotate:0deg}
