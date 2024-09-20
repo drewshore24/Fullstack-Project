@@ -27,6 +27,8 @@ function SortArticlesBy(){
             <select id='options' name='options' onChange={changeHandler}>
             <option value="">Select Catagory to Sort By</option>
             <option value="created_at">date</option>
+            <option value="author">author</option>
+            <option value="title">title</option>
             {/* <option value="comment_count">comment count</option> broken due to BE */}
             <option value="votes"> votes</option>
             </select>
