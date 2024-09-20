@@ -1,8 +1,5 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { postComment } from "../../websiteAPI.js";
+import { useState} from "react";
 import { deleteComment } from "../../websiteAPI.js";
-import ShowPostedComment from "./ShowPostedComment.jsx";
 
 const DeletedThisComment= ({username, comment}) => {
     const [errorCatch, setErrorCatch] = useState(false)

@@ -2,7 +2,7 @@ import { getTopics } from "../../websiteAPI"
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function TopicsDropDown({selectedTopic, setSelectedTopic}){
+function TopicsNav({selectedTopic, setSelectedTopic}){
     const [topics, setTopics] = useState([]);
     const [isLoading, setLoading] = useState(false);
     const [isError, setError] = useState(false);
@@ -46,4 +46,4 @@ function TopicsDropDown({selectedTopic, setSelectedTopic}){
 //     )
 }
 
-export default TopicsDropDown
+export default TopicsNav

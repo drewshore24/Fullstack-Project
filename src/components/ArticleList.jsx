@@ -3,14 +3,18 @@ import {getArticleList} from "../../websiteAPI";
 import { Link } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 import { getArticlesByTopics } from "../../websiteAPI";
-import TopicsDropDown from "./TopicsNavs.jsx";
-import { useNavigate } from "react-router-dom"
+import TopicsNav from "./TopicsNavs.jsx";
+import { useSearchParams, useParams} from "react-router-dom"
+import { getSortBy } from "../../websiteAPI";
+import SortArticlesBy from "./SortArticlesBy.jsx";
 
 const ArticleList = ({allArticles, setAllArticles, selectedTopic, setSelectedTopic}) => {
-
+  const [searchParams, setSearchParams] = useSearchParams()
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
-
+  const [sortedArticles, setSortedArticles] = useState([])
+  const sort_by = searchParams.get('sort_by');
+  const order = searchParams.get('order');
 
   useEffect(() => {
     setLoading(true);
@@ -31,9 +35,15 @@ const ArticleList = ({allArticles, setAllArticles, selectedTopic, setSelectedTop
   useEffect(() => {
     getArticlesByTopics(selectedTopic)
     .then((response) => {
-      console.log(response)
     })
   },[selectedTopic])
+
+  useEffect(() => {
+    getSortBy(sort_by, order)
+    .then((response)=> {
+      setSortedArticles(response)
+    })
+  }, [sort_by, order])
 
   if (isLoading) {
     return (
@@ -55,10 +65,34 @@ const ArticleList = ({allArticles, setAllArticles, selectedTopic, setSelectedTop
       </>
     );
   }
-
-  if(selectedTopic){
-
+  if(sortedArticles.length === 0){
+    return (
+      <section className="ArticleList">
+        <nav>
+          <Link className="link" to="/">
+            Home
+          </Link>
+        </nav>
+        <h1>Articles</h1>
+        <SortArticlesBy/>
+        <section>
+          <h2>Topics:</h2>
+          <TopicsNav selectedTopic={selectedTopic} setSelectedTopic={setSelectedTopic}/>
+        </section>
+        <section className="Map">
+          {allArticles.map((article) => {
+            return (
+              <ArticleCard
+              key={article.article_id}
+              article={article}
+            />
+            );
+          })}
+        </section>
+      </section>
+    );
   }
+
 
   return (
     <section className="ArticleList">
@@ -68,11 +102,13 @@ const ArticleList = ({allArticles, setAllArticles, selectedTopic, setSelectedTop
         </Link>
       </nav>
       <h1>Articles</h1>
+      <SortArticlesBy/>
       <section>
-        <TopicsDropDown selectedTopic={selectedTopic} setSelectedTopic={setSelectedTopic}/>
+        <h2>Topics:</h2>
+        <TopicsNav selectedTopic={selectedTopic} setSelectedTopic={setSelectedTopic}/>
       </section>
       <section className="Map">
-        {allArticles.map((article) => {
+        {sortedArticles.map((article) => {
           return (
             <ArticleCard
             key={article.article_id}
