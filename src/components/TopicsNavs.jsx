@@ -1,6 +1,8 @@
 import { getTopics } from "../../websiteAPI"
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Loading from "./Loading";
+import Error from "./Error";
 
 function TopicsNav({selectedTopic, setSelectedTopic}){
     const [topics, setTopics] = useState([]);
@@ -22,6 +24,18 @@ function TopicsNav({selectedTopic, setSelectedTopic}){
           });
       }, []);
 
+
+      if (isLoading) {
+        return (
+          <Loading/>
+        );
+      }
+    
+    
+      if (isError) {
+        <Error/>
+      }
+    
 
     return(
       <section>

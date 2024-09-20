@@ -129,6 +129,24 @@ textarea {
   height: 150px;
 }
 
+
+.error{
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertical centering */
+  align-items: center;     /* Horizontal centering */
+  height: 100vh;           /* Full viewport height to center the content */
+  text-align: center;
+}
+.error img{
+  height: 200px;
+  display: grid;
+  place-items: center;
+  height: 50vh;
+  border: 1.5px solid #ccc;
+  margin-bottom: 10px
+}
+
 nav{
   text-align: center;
 }

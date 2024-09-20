@@ -6,6 +6,7 @@ import ArticleList from './components/ArticleList';
 import IndividualArticle from './components/IndividualArticle';
 import GetAllComments from './components/GetAllComments'
 import TopicPage from './components/TopicPage';
+import Error from './components/Error';
 
 function App() {
   const [allArticles, setAllArticles] = useState([])
@@ -13,6 +14,7 @@ function App() {
   const [currVote, setCurrVote] = useState(0)
   const [selectedTopic, setSelectedTopic] = useState(null)
   const [username, setUsername] = useState('tickle122')
+  const [error, setError] = useState(null)
 
   return (
     <div className='App'>
@@ -37,6 +39,7 @@ function App() {
         path='/articles/topic/:topic'
         element = {<TopicPage selectedTopic={selectedTopic} />}
         />
+        <Route path="*" element={<Error error={error}/>}/>
       </Routes>
     </div>
   )

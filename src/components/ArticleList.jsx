@@ -7,18 +7,20 @@ import TopicsNav from "./TopicsNavs.jsx";
 import { useSearchParams, useParams} from "react-router-dom"
 import { getSortBy } from "../../websiteAPI";
 import SortArticlesBy from "./SortArticlesBy.jsx";
+import Error from "./Error.jsx";
+import Loading from "./Loading.jsx";
 
 const ArticleList = ({allArticles, setAllArticles, selectedTopic, setSelectedTopic}) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [isLoading, setLoading] = useState(false);
-  const [isError, setError] = useState(false);
+  const [error, setError] = useState(null)
   const [sortedArticles, setSortedArticles] = useState([])
   const sort_by = searchParams.get('sort_by');
   const order = searchParams.get('order');
 
   useEffect(() => {
-    setLoading(true);
-    setError(false);
+    setLoading(true)
+    setError(null)
     getArticleList()
       .then((response) => {
         setLoading(false);
@@ -47,24 +49,15 @@ const ArticleList = ({allArticles, setAllArticles, selectedTopic, setSelectedTop
 
   if (isLoading) {
     return (
-      <>
-        <img className="Loading" src="src/assets/loading-wheel.svg"></img>
-        <p className="normalText">Hang tight</p>
-        <p className="normalText">Things are happening...</p>
-      </>
+      <Loading/>
     );
   }
 
 
-  if (isError) {
-    console.log(isError);
-    return (
-      <>
-        <img className="errorImage" src=""></img>
-        <p className="normalText">Status: {isError.status}....Uh Oh</p>
-      </>
-    );
+  if (error) {
+    <Error error={error}/>
   }
+
   if(sortedArticles.length === 0){
     return (
       <section className="ArticleList">
