@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { getArticle, patchVote } from "../../websiteAPI";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import GetAllComments from "./GetAllComments";
 import ArticleCard from "./ArticleCard";
-import { Routes, Route } from "react-router-dom";
 
 
 const IndividualArticle = ({reqArticle, setReqArticle}) => {

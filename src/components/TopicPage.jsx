@@ -12,7 +12,6 @@ function TopicPage(){
     useEffect(()=> {
         getArticlesByTopics(topic)
         .then((articles)=> {
-            console.log(articles, 'articles')
             setTopicList(articles)
         })
     },[])

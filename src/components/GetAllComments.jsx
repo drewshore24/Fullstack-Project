@@ -31,6 +31,14 @@ useEffect(() => {
 
 return(
     <section>
+      <nav>
+        <Link className="link" to="/">
+          Home
+        </Link>
+        <Link className="link" to="/articles">
+          Articles
+        </Link>
+        </nav>
             <ArticleCard
             key={reqArticle.article_id}
             article={reqArticle}
